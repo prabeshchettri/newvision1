@@ -1,0 +1,60 @@
+=== New Vision Academy - Vercel Complete Fixed ===
+
+YO ZIP FLAT EXTRACT HUNCHHA (nested folder hudaina).
+
+1. Desktop ma folder banaunuhos:
+   PowerShell:
+   cd C:\Users\basud\OneDrive\Desktop
+   Remove-Item -Recurse -Force nva-final -ErrorAction SilentlyContinue
+   mkdir nva-final
+   cd nva-final
+
+2. Yo ZIP download garepachi Right-click -> Extract All...
+   Destination path: C:\Users\basud\OneDrive\Desktop\nva-final
+   (IMPORTANT: Extract All garda "Show extracted files" tick hatauna sakchau, tara destination nva-final nai hunu parchha)
+
+3. Extract pachi PowerShell ma:
+   cd C:\Users\basud\OneDrive\Desktop\nva-final
+   dir
+
+   YO DEKHINU PARCHHA (nested folder hudaina):
+   api
+   app
+   static
+   templates
+   vercel.json
+   requirements.txt
+   SETUP_INSTRUCTIONS.txt
+   ...
+
+   Yadi arko folder (jastai NVA_VERCEL...) dekhiyo bhane:
+   Move-Item .\*\* .\ -Force
+   dir
+
+4. Git push:
+   git init
+   git branch -M main
+   git remote add origin https://github.com/prabeshchettri/newvision1.git
+   git add .
+   git status
+   git commit -m "Complete Vercel fix: templates + includeFiles + paths"
+   git push -u origin main --force
+
+5. Vercel ma auto deploy hunchha (1-2 min). Check:
+   https://newvisionacademy.com.np/debug-fs
+   https://newvisionacademy.com.np
+
+DEBUG-FS ma home.html exists=True dekhinu parchha.
+
+IMPORTANT ENV VARS (Vercel Dashboard -> Settings -> Environment Variables):
+- DATABASE_URL = your Neon/Supabase Postgres connection string (required!)
+- CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET (for images)
+- SECRET_KEY = random long string
+- Other vars from env.example
+
+TemplateNotFound fix:
+- vercel.json ma includeFiles string glob
+- templates/ , app/templates/ , api/templates/ tinai thau ma copy
+- app/__init__.py ma multi-path jinja loader + /var/task search
+- api/index.py path middleware
+
